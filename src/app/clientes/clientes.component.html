@@ -1,0 +1,33 @@
+<h2 class="title">Cliente</h2>
+<div class="datos">
+  <div>
+    <form class="example-form" [formGroup]="clienteModel" (ngSubmit)="getCliente()">
+      <mat-form-field class="example-full-width">
+        <mat-label>Identificación del cliente</mat-label>
+        <input matInput placeholder="66995522" type="number" formControlName="identifiacion">
+        <button class="btn-top" mat-raised-button color="primary">Consultar</button>
+      </mat-form-field>
+    </form>
+  </div>
+  
+  <div>
+    <div *ngIf="!cliente.Identifiacion">
+      <h3>No se ha seleccionado ningún cliente.</h3>
+    </div>
+  </div>
+</div>
+
+<mat-card class="list-horizontal" *ngIf="cliente.Identifiacion">
+  <mat-label>Identificacion </mat-label>
+  <input matInput value="{{cliente.Identifiacion}}" disabled>
+  <mat-label>Nombres </mat-label>
+  <input matInput value="{{cliente.Nombres}}" disabled>
+  <mat-label>Apellidos </mat-label>
+  <input matInput value="{{cliente.Apellidos}}" disabled>
+  <mat-label>Direccion </mat-label>
+  <input matInput value="{{cliente.Direccion}}" disabled>
+  <mat-label>Telefono </mat-label>
+  <input matInput value="{{cliente.Telefono}}" disabled>
+  <mat-label>Email </mat-label>
+  <input matInput value="{{cliente.Email}}" disabled>
+</mat-card>

@@ -1,0 +1,10 @@
+<h1>Ventas</h1>
+<div>
+    <mat-label>Fecha </mat-label>
+    <input type="text" value="{{fecha}}" disabled>
+</div>
+
+<app-clientes #cliente></app-clientes>
+<app-productos #productos></app-productos>
+
+<button mat-raised-button color="accent" (click)="validarVenta()">Crear venta</button>

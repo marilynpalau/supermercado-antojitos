@@ -1,0 +1,56 @@
+<h2 class="title">Producto</h2>
+<div class="datos">
+  <div>
+    <form class="example-form" [formGroup]="productoModel" (ngSubmit)="getProducto()">
+      <!-- <mat-label>Producto</mat-label>   -->
+      <mat-form-field class="example-full-width">
+        <mat-label>Código del producto</mat-label>
+        <input matInput placeholder="0001" type="text" formControlName="codigo">
+        <button class="btn-top" mat-raised-button color="primary">Consultar</button>
+      </mat-form-field>
+    </form>
+  </div>
+
+  <div *ngIf="!productosSeleccionados.length">
+    <h3>No se ha agregado ningún producto.</h3>
+  </div>
+
+</div>
+
+<div *ngIf="productosSeleccionados.length">
+  <mat-card class="list-horizontal">
+    <mat-list role="list" class="list-horizontal">
+      <mat-label>Codigo</mat-label>
+      <mat-label>Nombre</mat-label>
+      <mat-label>Valor Unidad</mat-label>
+      <mat-label>Cantidad</mat-label>
+      <mat-label>Subtotal</mat-label>
+      <mat-label>Stock</mat-label>
+      <mat-label></mat-label>
+    </mat-list>
+  </mat-card>
+
+  <mat-list role="list" class="list-horizontal" *ngFor="let fila of productosSeleccionados; let i = index">
+    <mat-list-item role="listitem">{{fila.Codigo}}</mat-list-item>
+    <mat-list-item role="listitem">{{fila.Nombre}}</mat-list-item>
+    <mat-list-item role="listitem">{{fila.ValorUnidad}}</mat-list-item>
+    <mat-list-item role="listitem">
+
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <mat-label>Unidades </mat-label>
+          <input matInput placeholder="2" [formControl]="cantidades.controls[i]" type="number"
+            (blur)="calcularSubtotal($event, fila)">
+        </mat-form-field>
+      </form>
+    </mat-list-item>
+
+    <mat-list-item role="listitem"><b>$ </b> {{fila.Subtotal}}</mat-list-item>
+    <mat-list-item role="listitem">{{fila.Stock}}</mat-list-item>
+    <mat-list-item role="listitem"> <button mat-raised-button color="warn" (click)="eliminar(fila)">Eliminar</button>
+    </mat-list-item>
+  </mat-list>
+
+</div>
+
+<h2>Total venta: $ {{total}}</h2>
